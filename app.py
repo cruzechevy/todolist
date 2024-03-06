@@ -7,6 +7,8 @@ app = Flask(__name__)
 # Initialize a list to store tasks
 tasks = []
 
+"""Fetch the template index file from the html folder"""
+
 @app.route('/')
 def index():
     return render_template('index.html', tasks=tasks)
@@ -18,6 +20,9 @@ def add_task():
     due_date = request.form['due_date']
     tasks.append({'task': task, 'priority': priority, 'due_date': due_date, 'completed': False})
     return redirect(url_for('index'))
+
+
+"""The below task is used to show the task as completed when Complete button on the Flask App is clicked"""
 
 @app.route('/complete/<int:task_id>')
 def complete_task(task_id):
