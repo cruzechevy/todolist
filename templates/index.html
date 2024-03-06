@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <form action="/add" method="post">
+        <input type="text" name="task" placeholder="Enter task">
+        <select name="priority">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+        <input type="date" name="due_date">
+        <button type="submit">Add</button>
+    </form>
+    <ul>
+        {% for task_id in range(tasks|length) %}
+            {% set task = tasks[task_id] %}
+            <li>
+                {% if task['completed'] %}
+                    <s>{{ task['task'] }}</s>
+                {% else %}
+                    {{ task['task'] }}
+                {% endif %}
+                <span>Priority: {{ task['priority'] }}</span>
+                <span>Due date: {{ task['due_date'] }}</span>
+                <input type="checkbox" name="complete" onclick="window.location.href='/complete/{{ task_id }}'" {% if task['completed'] %} checked {% endif %}>
+            </li>
+        {% endfor %}
+    </ul>
+    <form action="/delete_completed" method="get">
+        <button type="submit">Delete Completed Tasks</button>
+    </form>
+</body>
+</html>
