@@ -30,6 +30,8 @@ def complete_task(task_id):
         tasks[task_id]['completed'] = True
     return redirect(url_for('index'))
 
+"""The below task will completely remove the task from the app"""
+
 @app.route('/delete_completed')
 def delete_completed():
     global tasks
