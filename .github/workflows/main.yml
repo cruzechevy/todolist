@@ -1,4 +1,4 @@
-name: Run Tests
+name: Run Tests and SonarCloud Analysis
 
 on: [push]
 
@@ -16,6 +16,32 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install flask
+
     - name: Run tests
       run: |
         python -m unittest discover -v
+
+  sonarcloud:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flask
+
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@v1
+      with:
+        organization: "cruzechevy"
+        token: ${{ secrets.SONAR_TOKEN }}
+        projectKey: "cruzechevy_todolist"
+        projectName: "todolist"
