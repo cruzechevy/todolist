@@ -38,10 +38,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install flask
 
-    - name: SonarCloud Scan
+    - name: Run SonarCloud analysis
       uses: sonarsource/sonarcloud-github-action@master
       with:
-        organization: "cruzechevy"
-        token: ${{ secrets.SONAR_TOKEN }}
-        projectKey: "cruzechevy_todolist"
-        projectName: "todolist"
+        entryPoint: sonar-scanner
+        args: -Dsonar.organization=cruzechevy -Dsonar.projectKey=cruzechevy_todolist -Dsonar.projectName=todolist
+        projectBaseDir: .
+      env:
+        pythonLocation: /opt/hostedtoolcache/Python/3.12.2/x64
+        LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.2/x64/lib
