@@ -39,7 +39,7 @@ jobs:
         pip install flask
 
     - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@v1
+      uses: sonarsource/sonarcloud-github-action@master
       with:
         organization: "cruzechevy"
         token: ${{ secrets.SONAR_TOKEN }}
