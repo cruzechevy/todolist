@@ -10,7 +10,7 @@ class TestApp(unittest.TestCase):
     def test_index(self):
         response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
-
+        
     def test_add_task(self):
         response = self.app.post('/add', data=dict(task='Test Task', priority='Low', due_date='2024-03-15'))
         self.assertEqual(response.status_code, 302)  # Redirects after adding a task

@@ -1,3 +1,5 @@
+"""THis is simple Flask Application to add,update and delete Task Planner"""
+
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
